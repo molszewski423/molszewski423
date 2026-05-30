@@ -9,7 +9,7 @@ molszewski423@gmail.com
 
 ## Clinical AI Projects
 
-These aren't demo projects — they solve real problems from 18 years of clinical practice.
+These aren't demo projects — they solve real problems from 20 years of clinical practice.
 
 **[pv-workbench](https://gitlab.com/molszewski423/pv-workbench)** — Pharmacovigilance signal intelligence platform built for PV consulting work. PRR/ROR disproportionality analysis with Evans criteria against FDA FAERS, RAG over ICH/FDA/EMA regulatory guidelines, MedDRA coding, ICSR narrative generation, and literature monitoring. Runs entirely local on an RTX 5060 Ti — no data leaves the machine.
 
@@ -20,6 +20,16 @@ These aren't demo projects — they solve real problems from 18 years of clinica
 ---
 
 ## Infrastructure & Homelab
+
+Four-machine homelab networked via Tailscale mesh — all running Linux, all 24/7 capable:
+
+| Machine | Role | Hardware |
+|---|---|---|
+| **MikePC** | GPU workstation, Ollama inference | Ryzen 7 7800X3D · RTX 5060 Ti · Debian 13 |
+| **archbox** | 24/7 server, 25-container agency pod | Intel i3-4130T · Arch Linux |
+| **MikeInspiron** | Dev laptop | Dell Inspiron · Debian 13 · Hyprland |
+| **ThinkPad** | Incoming dev machine | Debian 13 (pending setup) |
+| **debianbook** | Portable Linux node | Samsung Chromebook Pro · Debian 13 · Sway |
 
 **[homelab-infra](https://gitlab.com/molszewski423/homelab-infra)** — 25-service Podman pod (Arch Linux), AdGuard Home DNS filtering, CrowdSec intrusion detection with nftables bouncer, Cloudflare Tunnel, Ansible bootstrap playbook, Terraform for AWS provisioning. Previously ran on a Raspberry Pi 4.
 
