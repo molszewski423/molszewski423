@@ -1,11 +1,9 @@
 # Michael Olszewski
 
-**DevOps Engineer · AI Systems Developer**
-Charlotte metro, NC · molszewski423@gmail.com
+**DevOps Engineer · AI Systems Developer · Charlotte, NC**
+molszewski423@gmail.com
 
----
-
-I've been tinkering with computers since MS-DOS and BBS days, long before the modern internet existed. Decades of Linux use as a passion finally found a productive outlet in DevOps and AI infrastructure — the homelab isn't a portfolio project, it's just how I've always worked.
+*Linux since before the web existed. Now running production AI infrastructure on a homelab I've been building for decades.*
 
 ---
 
