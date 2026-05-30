@@ -13,9 +13,7 @@ These aren't demo projects — they solve real problems from 20 years of clinica
 
 **[pv-workbench](https://gitlab.com/molszewski423/pv-workbench)** — Pharmacovigilance signal intelligence platform built for PV consulting work. PRR/ROR disproportionality analysis with Evans criteria against FDA FAERS, RAG over ICH/FDA/EMA regulatory guidelines, MedDRA coding, ICSR narrative generation, and literature monitoring. Runs entirely local on an RTX 5060 Ti — no data leaves the machine.
 
-**[ams-intelligence](https://gitlab.com/molszewski423/ams-intelligence)** — Clinical AI for antimicrobial stewardship programs, built on 20 years of ID/AMS practice and the experience of leading an organization to IDSA Antimicrobial Stewardship Center of Excellence designation. Aggregates NHSN, WHONET, FAERS, PubMed, and ATLAS. Detects resistance trends and adverse drug event signals with PRR signal detection. Confounding by indication is explicitly modeled — because last-resort antibiotics treat the sickest patients and a naive statistical read will always mislead.
-
-**[ams-gateway](https://gitlab.com/molszewski423/ams-gateway)** — Authenticated portal for AMS Intelligence. Role-based access for clinical teams.
+**[ams-intelligence](https://gitlab.com/molszewski423/ams-intelligence)** — Clinical AI for antimicrobial stewardship programs, built on 20 years of ID/AMS practice and the experience of leading an organization to IDSA Antimicrobial Stewardship Center of Excellence designation. Aggregates NHSN, WHONET, FAERS, PubMed, and ATLAS. Detects resistance trends and adverse drug event signals with PRR signal detection. Confounding by indication is explicitly modeled — because last-resort antibiotics treat the sickest patients and a naive statistical read will always mislead. Includes an authenticated gateway portal for clinical team access.
 
 ---
 
