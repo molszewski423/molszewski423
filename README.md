@@ -1,7 +1,7 @@
 # Michael Olszewski
 
 **DevOps Engineer · AI Systems Developer**
-Philadelphia area · molszewski423@gmail.com
+Troutman, NC (Charlotte metro) · molszewski423@gmail.com
 
 ---
 
