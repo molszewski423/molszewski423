@@ -1,7 +1,7 @@
 # Michael Olszewski
 
 **DevOps Engineer · AI Systems Developer**
-Troutman, NC (Charlotte metro) · molszewski423@gmail.com
+Charlotte metro, NC · molszewski423@gmail.com
 
 ---
 
