@@ -25,7 +25,7 @@ These aren't demo projects — they solve real problems from 20 years of clinica
 
 | Machine | Role | Hardware | OS |
 |---|---|---|---|
-| **MikePC** | GPU workstation · Ollama inference server | Ryzen 7 7800X3D · RTX 5060 Ti 8GB | Debian 13 |
+| **MikePC** | GPU workstation · Ollama inference server | Ryzen 7 7800X3D · RTX 5060 Ti 16GB | Debian 13 |
 | **archbox** | 24/7 home server · 25-container agency pod | Intel i3-4130T · Alienware Alpha | Arch Linux |
 | **MikeInspiron** | Dev laptop | Dell Inspiron | Debian 13 · Hyprland |
 | **ThinkPad** | Incoming dev machine | — | Debian 13 (pending) |
