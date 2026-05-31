@@ -9,6 +9,8 @@ Twenty years in critical care and infectious disease gives you a particular pers
 
 Everything here  -  the clinical AI platforms, the homelab infrastructure, the DevOps and cloud work  -  has been built entirely in my own time, outside of my traditional clinical pharmacist role. That is precisely the point. This is what I do because I find it genuinely compelling, and it is why I am actively looking for consulting and freelance opportunities where these skills can be put to use.
 
+For context on where this comes from: at 10 years old I was logging into BBS services on a 286 running MS-DOS, years before the world wide web existed. The command line has never felt unfamiliar. What has changed is that decades of working at that level now has a real outlet.
+
 ---
 
 ## Clinical AI
