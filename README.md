@@ -5,11 +5,11 @@ molszewski423@gmail.com
 
 ---
 
-Twenty years in critical care and infectious disease gives you a particular perspective on clinical data — you learn quickly that the difference between a real safety signal and statistical noise can matter enormously. That experience is what led me to build my own clinical AI tooling rather than wait for commercial platforms to catch up. I led my organization to IDSA Antimicrobial Stewardship Center of Excellence designation, and somewhere along the way, a decades-long passion for Linux became the infrastructure that runs it all.
+Twenty years in critical care and infectious disease gives you a particular perspective on clinical data - you learn quickly that the difference between a real safety signal and statistical noise can matter enormously. That experience is what led me to build my own clinical AI tooling rather than wait for commercial platforms to catch up. I led my organization to IDSA Antimicrobial Stewardship Center of Excellence designation, and somewhere along the way, a decades-long passion for Linux became the infrastructure that runs it all.
 
-Everything here — the clinical AI platforms, the homelab infrastructure, the DevOps and cloud work — has been built entirely in my own time, outside of my traditional clinical pharmacist role. That is precisely the point. This is what I do because I find it genuinely compelling, and it is why I am actively looking for consulting and freelance opportunities where these skills can be put to use.
+Everything here - the clinical AI platforms, the homelab infrastructure, the DevOps and cloud work - has been built entirely in my own time, outside of my traditional clinical pharmacist role. That is precisely the point. This is what I do because I find it genuinely compelling, and it is why I am actively looking for consulting and freelance opportunities where these skills can be put to use.
 
-The technical foundation goes back further than most. At 10 years old I was writing BASIC, cracking open computers to learn how the hardware worked, and dialing into BBS services on a 286 running MS-DOS — years before the web existed. The command line, the hardware, the problem-solving at the system level — none of it has ever felt foreign. What has changed is that four decades of accumulated instinct now has a real and productive outlet.
+The technical foundation goes back further than most. At 10 years old I was writing BASIC, cracking open computers to learn how the hardware worked, and dialing into BBS services on a 286 running MS-DOS - years before the web existed. The command line, the hardware, the problem-solving at the system level - none of it has ever felt foreign. What has changed is that four decades of accumulated instinct now has a real and productive outlet.
 
 ---
 
@@ -17,13 +17,13 @@ The technical foundation goes back further than most. At 10 years old I was writ
 
 ### [pv-workbench](https://gitlab.com/molszewski423/pv-workbench)
 
-Pharmacovigilance platform for signal detection, MedDRA coding, ICSR narrative drafting, and literature monitoring. Built around a tiered LLM stack: `gemma4:26b` for regulatory Q&A and signal interpretation, `gemma4:e4b` for ICSR narrative generation, and `qwen2.5:7b` for fast intent routing. PRR/ROR disproportionality analysis against FDA FAERS using Evans criteria — with continuity correction for sparse data, Yates' chi-squared correction, and artifact exclusion. RAG over ICH/FDA/EMA guidelines via ChromaDB. All inference runs on a local RTX 5060 Ti via Ollama — no patient data leaves the machine. Deployed as a k3s pod at `http://pv.lan`.
+Pharmacovigilance platform for signal detection, MedDRA coding, ICSR narrative drafting, and literature monitoring. Built around a tiered LLM stack: `gemma4:26b` for regulatory Q&A and signal interpretation, `gemma4:e4b` for ICSR narrative generation, and `qwen2.5:7b` for fast intent routing. PRR/ROR disproportionality analysis against FDA FAERS using Evans criteria - with continuity correction for sparse data, Yates' chi-squared correction, and artifact exclusion. RAG over ICH/FDA/EMA guidelines via ChromaDB. All inference runs on a local RTX 5060 Ti via Ollama - no patient data leaves the machine. Deployed as a k3s pod at `http://pv.lan`.
 
-**[argus-bot](https://gitlab.com/molszewski423/pv-workbench)** — Discord bot (Argus#1432) providing mobile access to pv-workbench for signal queries, case lookups, and narrative review.
+**[argus-bot](https://gitlab.com/molszewski423/pv-workbench)** - Discord bot (Argus#1432) providing mobile access to pv-workbench for signal queries, case lookups, and narrative review.
 
 ### [ams-intelligence](https://gitlab.com/molszewski423/ams-intelligence)
 
-Antimicrobial stewardship platform surfacing resistance trends, utilization signals, and clinical decision support. Backed by two decades of hands-on AMS program leadership including IDSA Center of Excellence designation. Confounding by indication is explicitly modeled — last-resort antibiotics treat the sickest patients in the building; the platform is built to catch that bias. Deployed at `http://ams.lan` on the same k3s cluster.
+Antimicrobial stewardship platform surfacing resistance trends, utilization signals, and clinical decision support. Backed by two decades of hands-on AMS program leadership including IDSA Center of Excellence designation. Confounding by indication is explicitly modeled - last-resort antibiotics treat the sickest patients in the building; the platform is built to catch that bias. Deployed at `http://ams.lan` on the same k3s cluster.
 
 ---
 
@@ -31,7 +31,7 @@ Antimicrobial stewardship platform surfacing resistance trends, utilization sign
 
 ### [ringcatch-agency](https://gitlab.com/molszewski423/ringcatch-agency) · [ringcatch.io](https://ringcatch.io)
 
-AI chatbot agency serving US local SMBs — $450 setup + $89/month. Fully automated pipeline from lead scraping through booking, onboarding, and client success. Twenty-four services running in Kubernetes on archbox, migrated from Podman systemd quadlets on 2026-05-31.
+AI chatbot agency serving US local SMBs - $450 setup + $89/month. Fully automated pipeline from lead scraping through booking, onboarding, and client success. Twenty-four services running in Kubernetes on archbox, migrated from Podman systemd quadlets on 2026-05-31.
 
 **LLM routing:** Gemini 2.5 Flash → Ollama gemma4:26b (k3s GPU pod on MikePC) → Groq llama-3.3-70b → Groq llama-3.1-8b
 
@@ -48,8 +48,8 @@ Public via Cloudflare tunnel: `ringcatch.io`, `dashboard.ringcatch.io`
 | **MikePC** | k3s control plane + GPU node | RTX 5060 Ti 16 GB | Debian 13 | 192.168.4.54 |
 | **archbox** | k3s worker · 24/7 server | Intel i3-4130T | Arch Linux | 192.168.4.46 |
 | **MikeInspiron** | k3s worker · 24/7 lid-closed | Dell Inspiron | Debian 13 | 192.168.4.33 |
-| **ThinkPad** | Remote daily driver | — | Debian 13 | — |
-| **debianbook** | Samsung Chromebook Pro | Skylake | Debian 13 · Sway | — |
+| **ThinkPad** | Remote daily driver | - | Debian 13 | - |
+| **debianbook** | Samsung Chromebook Pro | Skylake | Debian 13 · Sway | - |
 
 ### Current Architecture (deployed 2026-05-31)
 
@@ -112,9 +112,9 @@ Full IaC for the cluster: k3s manifests for both namespaces (ai + agency), NVIDI
 
 ## Dotfiles & Linux
 
-**[dotfiles](https://gitlab.com/molszewski423/dotfiles)** — Fish, Hyprland, Kitty, Neovim, Starship, Waybar across Debian and Arch. `install.sh` sets up a new machine in one command.
+**[dotfiles](https://gitlab.com/molszewski423/dotfiles)** - Fish, Hyprland, Kitty, Neovim, Starship, Waybar across Debian and Arch. `install.sh` sets up a new machine in one command.
 
-**[linux-notes](https://gitlab.com/molszewski423/linux-notes)** — Running log of things worth remembering: hardware quirks, driver fixes, networking gotchas. RTX 5060 Ti Blackwell on Debian, Tailscale/nftables interaction on Arch, i915 firmware dimming, Chromebook UEFI.
+**[linux-notes](https://gitlab.com/molszewski423/linux-notes)** - Running log of things worth remembering: hardware quirks, driver fixes, networking gotchas. RTX 5060 Ti Blackwell on Debian, Tailscale/nftables interaction on Arch, i915 firmware dimming, Chromebook UEFI.
 
 ---
 
