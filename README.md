@@ -7,6 +7,8 @@ molszewski423@gmail.com
 
 Twenty years in critical care and infectious disease gives you a particular perspective on clinical data  -  you learn quickly that the difference between a real safety signal and statistical noise can matter enormously. That experience is what led me to build my own clinical AI tooling rather than wait for commercial platforms to catch up. I led my organization to IDSA Antimicrobial Stewardship Center of Excellence designation, and somewhere along the way, a decades-long passion for Linux became the infrastructure that runs it all.
 
+Everything here  -  the clinical AI platforms, the homelab infrastructure, the DevOps and cloud work  -  has been built entirely in my own time, outside of my traditional clinical pharmacist role. That is precisely the point. This is what I do because I find it genuinely compelling, and it is why I am actively looking for consulting and freelance opportunities where these skills can be put to use.
+
 ---
 
 ## Clinical AI
