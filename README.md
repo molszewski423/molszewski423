@@ -1,37 +1,37 @@
 # Michael Olszewski
 
-**PharmD, BCPS, BCCCP · DevOps Engineer · AI Systems Developer · Charlotte, NC**
+**PharmD, BCPS, BCCCP · DevOps Engineer · Clinical AI Developer · Charlotte, NC**
 molszewski423@gmail.com
-
-*20 years in critical care and infectious disease. Led my organization to IDSA Antimicrobial Stewardship Center of Excellence designation. Linux since before the web existed. Building clinical AI infrastructure that I can actually trust because I understand both sides of it.*
 
 ---
 
-## Clinical AI Projects
+Twenty years in critical care and infectious disease gives you a particular perspective on clinical data — you learn quickly that the difference between a real safety signal and statistical noise can matter enormously. That experience is what led me to build my own clinical AI tooling rather than wait for commercial platforms to catch up. I led my organization to IDSA Antimicrobial Stewardship Center of Excellence designation, and somewhere along the way, a decades-long passion for Linux became the infrastructure that runs it all.
 
-These aren't demo projects — they solve real problems from 20 years of clinical practice.
+---
 
-**[pv-workbench](https://gitlab.com/molszewski423/pv-workbench)** — Pharmacovigilance signal intelligence platform built for PV consulting work. PRR/ROR disproportionality analysis with Evans criteria against FDA FAERS, RAG over ICH/FDA/EMA regulatory guidelines, MedDRA coding, ICSR narrative generation, and literature monitoring. Runs entirely local on an RTX 5060 Ti — no data leaves the machine.
+## Clinical AI
 
-**[ams-intelligence](https://gitlab.com/molszewski423/ams-intelligence)** — Clinical AI for antimicrobial stewardship programs, built on 20 years of ID/AMS practice and the experience of leading an organization to IDSA Antimicrobial Stewardship Center of Excellence designation. Aggregates NHSN, WHONET, FAERS, PubMed, and ATLAS. Detects resistance trends and adverse drug event signals with PRR signal detection. Confounding by indication is explicitly modeled — because last-resort antibiotics treat the sickest patients and a naive statistical read will always mislead. Includes an authenticated gateway portal for clinical team access.
+The pharmacovigilance and stewardship platforms below aren't side projects. They're tools I built to solve problems I ran into during clinical practice, running entirely on local hardware so patient data never leaves the machine.
+
+**[pv-workbench](https://gitlab.com/molszewski423/pv-workbench)** brings the full pharmacovigilance workflow into a single local platform — PRR/ROR disproportionality analysis against FDA FAERS using the Evans criteria, RAG-powered querying over ICH/FDA/EMA regulatory guidelines, MedDRA coding assistance, ICSR narrative generation, and automated literature monitoring. The statistical methods are production-grade: continuity correction for sparse FAERS data, Yates' chi-squared correction, and artifact exclusion to prevent administrative PTs from drowning out real signals. Clinical interpretation runs through a locally-hosted 26B parameter model — no cloud API calls, no data leaving the machine.
+
+**[ams-intelligence](https://gitlab.com/molszewski423/ams-intelligence)** applies the same disproportionality methodology to antimicrobial stewardship, aggregating resistance surveillance data from NHSN, WHONET, FAERS, PubMed, and the Pfizer ATLAS dataset. One design decision worth noting: confounding by indication is explicitly modeled throughout. Last-resort antibiotics treat the sickest patients in the building — a naive statistical read of the mortality signal will always mislead, and the platform is built to catch that. Includes an authenticated gateway portal for clinical team access.
 
 ---
 
 ## Infrastructure & Homelab
 
+My homelab has been running in one form or another for decades. The current setup spans five machines networked via Tailscale with zero open inbound ports — all public traffic routes through a Cloudflare Tunnel.
+
 ### Hardware
 
 | Machine | Role | Hardware | OS |
 |---|---|---|---|
-| **MikePC** | GPU workstation · Ollama inference server | Ryzen 7 7800X3D · RTX 5060 Ti 16GB | Debian 13 |
-| **archbox** | 24/7 home server · 25-container agency pod | Intel i3-4130T · Alienware Alpha | Arch Linux |
+| **MikePC** | GPU workstation · Ollama inference | Ryzen 7 7800X3D · RTX 5060 Ti 16GB | Debian 13 |
+| **archbox** | 24/7 server · 25-container agency pod | Intel i3-4130T · Alienware Alpha | Arch Linux |
 | **MikeInspiron** | Dev laptop | Dell Inspiron | Debian 13 · Hyprland |
 | **ThinkPad** | Incoming dev machine | — | Debian 13 (pending) |
 | **debianbook** | Portable node | Samsung Chromebook Pro (Skylake) | Debian 13 · Sway |
-
-All machines networked via **Tailscale** mesh (WireGuard). Zero open inbound ports on the home router — all public ingress via **Cloudflare Tunnel** on archbox.
-
----
 
 ### Current Architecture
 
@@ -87,11 +87,9 @@ All machines networked via **Tailscale** mesh (WireGuard). Zero open inbound por
    4. Groq llama-3.1-8b   (fallback #3 — cloud, fastest)
 ```
 
----
+### Where It's Heading
 
-### AWS Hybrid Migration (In Progress)
-
-Moving public-facing sales services to AWS EC2 while keeping internal automation on archbox. Tailscale bridges home and cloud — no VPC peering, no open ports.
+The homelab is mid-migration toward a hybrid cloud architecture. Public-facing RingCatch services are moving to AWS EC2 while internal automation stays on archbox — Tailscale bridges the two without VPC peering or open ports. Infrastructure is managed with Terraform, bootstrap automation with Ansible.
 
 ```
  ┌──────────────────────────────────────────────────────────────────┐
@@ -124,9 +122,7 @@ Moving public-facing sales services to AWS EC2 while keeping internal automation
  └───────────────────────────────────────────────────────┘
 ```
 
----
-
-### Kubernetes Target (k3s — This Weekend)
+A k3s cluster across MikePC, archbox, and MikeInspiron is also in progress — GPU workloads pinned to MikePC via node labels, long-running services on archbox. All container workloads are designed Kubernetes-ready from day one so the same manifests will eventually target AWS EKS.
 
 ```
  ┌─────────────────────────────────────────────────────────────────┐
@@ -149,34 +145,23 @@ Moving public-facing sales services to AWS EC2 while keeping internal automation
  └─────────────────────────────────────────────────────────────────┘
 ```
 
-All container workloads designed to be Kubernetes-ready from day one — environment variables only, no shared filesystems, health checks on every service, resource limits set. The Podman Compose files translate directly to Kubernetes manifests.
+**[homelab-infra](https://gitlab.com/molszewski423/homelab-infra)** contains the full IaC — 25 Podman quadlets, Ansible bootstrap playbook, Terraform for AWS provisioning, and network security configs for AdGuard, CrowdSec, and nftables.
 
----
-
-**[homelab-infra](https://gitlab.com/molszewski423/homelab-infra)** — Full IaC: 25 Podman quadlets, Ansible bootstrap playbook, Terraform AWS provisioning, AdGuard/CrowdSec/nftables network security configs.
-
-**[chromebook-linux](https://gitlab.com/molszewski423/chromebook-linux)** — Full Linux conversion of a Samsung Chromebook Pro: hardware write protection removal, MrChromebox UEFI firmware flash, Skylake audio DSP kernel parameter fix, DRM atomic sleep workaround.
+**[chromebook-linux](https://gitlab.com/molszewski423/chromebook-linux)** documents the full Linux conversion of a Samsung Chromebook Pro, including hardware write protection removal, MrChromebox UEFI firmware flashing, Skylake audio DSP fixes, and the DRM atomic sleep workaround.
 
 ---
 
 ## Dotfiles & Desktop
 
-**[dotfiles](https://gitlab.com/molszewski423/dotfiles)** — Complete Wayland desktop config for Debian 13. Hyprland + Sway + Waybar + Mako + Wofi + Fish. Includes `install.sh` for one-command setup on a new machine.
+**[dotfiles](https://gitlab.com/molszewski423/dotfiles)** covers the full Wayland desktop setup across Hyprland and Sway on Debian 13 — Waybar, Mako, Wofi, Kitty, Fish, and everything needed for a working environment. An `install.sh` script sets up a new machine in one command, which has come in handy more than once.
 
 ---
 
 ## Linux Notes
 
-**[linux-notes](https://gitlab.com/molszewski423/linux-notes)** — A running log of distros, problems solved, and things worth remembering.
+**[linux-notes](https://gitlab.com/molszewski423/linux-notes)** is a running log of things worth remembering — distro trade-offs, driver fixes, networking gotchas, and the kind of hard-won knowledge that only comes from actually running into the problem.
 
-Distros used: **NixOS** · **Arch Linux** · **Fedora Kinoite** · **Debian 13** · **ChromeOS → Linux**
-
-Notable entries:
-- RTX 5060 Ti (Blackwell) — `open = true` is mandatory, closed module doesn't support the architecture
-- Tailscale exit node + nftables on Arch — kernel module conflicts and fixes
-- Fedora Kinoite rootless Podman — SELinux `:Z` volume label gotcha
-- NixOS trade-off analysis — excellent for servers, friction for AI/ML dev workstations
-- Hybrid cloud architecture — Podman homelab to AWS EC2 via Tailscale bridge
+Covers NixOS, Arch Linux, Fedora Kinoite, Debian 13, and the ChromeOS-to-Linux conversion path. Some entries worth reading: the RTX 5060 Ti Blackwell driver situation on both NixOS and Debian, why NixOS is excellent for stable servers but friction for AI/ML dev workstations, and the Tailscale/nftables conflict on Arch that took longer than it should have to diagnose.
 
 ---
 
