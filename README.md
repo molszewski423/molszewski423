@@ -47,8 +47,8 @@ Public via Cloudflare tunnel: `ringcatch.io`, `dashboard.ringcatch.io`
 |---|---|---|---|---|
 | **MikePC** | k3s control plane + GPU node | RTX 5060 Ti 16 GB | Debian 13 | 192.168.4.54 |
 | **archbox** | k3s worker · 24/7 server | Intel i3-4130T | Arch Linux | 192.168.4.46 |
-| **MikeInspiron** | k3s worker · 24/7 lid-closed | Dell Inspiron | Debian 13 | 192.168.4.33 |
-| **ThinkPad** | Remote daily driver | - | Debian 13 | - |
+| **MikeInspiron** | k3s worker · 24/7 lid-closed | Dell Inspiron 3501 · i5-1035G1 · 8 GB RAM | Debian 13 | 192.168.4.33 |
+| **ThinkPad T14 Gen 2** | Remote daily driver | - | Debian 13 | i7-1185G7 · 32 GB DDR4 · 512 GB SSD · WiFi 6 |
 | **debianbook** | Samsung Chromebook Pro | Skylake | Debian 13 · Sway | - |
 
 ### Current Architecture (deployed 2026-05-31)
