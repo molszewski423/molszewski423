@@ -31,7 +31,7 @@ Antimicrobial stewardship platform surfacing resistance trends, utilization sign
 
 ### [ringcatch-agency](https://gitlab.com/molszewski423/ringcatch-agency) · [ringcatch.io](https://ringcatch.io)
 
-AI chatbot agency serving US local SMBs - $450 setup + $89/month. Fully automated pipeline from lead scraping through booking, onboarding, and client success. Twenty-four services running in Kubernetes on archbox, migrated from Podman systemd quadlets on 2026-05-31.
+Early-stage AI chatbot agency for US local SMBs - HVAC, plumbers, electricians, dental, auto repair, law firms. Launched May 2026, pre-revenue, actively in outreach. Pricing: $450 setup + $89/month. Twenty-four services running in Kubernetes on archbox - the full pipeline from lead scraping through booking is built and operational, working toward first clients.
 
 **LLM routing:** Gemini 2.5 Flash → Ollama gemma4:26b (k3s GPU pod on MikePC) → Groq llama-3.3-70b → Groq llama-3.1-8b
 
