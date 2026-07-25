@@ -31,7 +31,7 @@ Antimicrobial stewardship platform surfacing resistance trends, utilization sign
 
 ### [ringcatch-agency](https://gitlab.com/molszewski423/ringcatch-agency) · [ringcatch.io](https://ringcatch.io)
 
-Early-stage AI chatbot agency for US local SMBs - HVAC, plumbers, electricians, dental, auto repair, law firms. Launched May 2026, pre-revenue, actively in outreach. Pricing: $450 setup + $89/month. Twenty-four services running in Kubernetes on archbox - the full pipeline from lead scraping through booking is built and operational, working toward first clients.
+Early-stage AI chatbot agency for US local SMBs - HVAC, plumbers, electricians, dental, auto repair, law firms. Launched May 2026, pre-revenue, actively in outreach. Pricing: $450 setup + $89/month. Twenty-four services running in Kubernetes across the cluster - the full pipeline from lead scraping through booking is built and operational, working toward first clients.
 
 **LLM routing:** Gemini 2.5 Flash → Ollama gemma4:26b (k3s GPU pod on MikePC) → Groq llama-3.3-70b → Groq llama-3.1-8b
 
@@ -46,12 +46,17 @@ Public via Cloudflare tunnel: `ringcatch.io`, `dashboard.ringcatch.io`
 | Machine | Role | Hardware | OS | LAN |
 |---|---|---|---|---|
 | **MikePC** | k3s control plane + GPU node | RTX 5060 Ti 16 GB | Debian 13 | 192.168.4.54 |
-| **archbox** | k3s worker · 24/7 server | Intel i3-4130T | Arch Linux | 192.168.4.46 |
-| **MikeInspiron** | k3s worker · 24/7 lid-closed | Dell Inspiron 3501 · i5-1035G1 · 8 GB RAM | Debian 13 | 192.168.4.33 |
+| **archbox** | k3s worker · 24/7 server | Intel i3-4130T | Arch Linux | 192.168.4.45 |
+| **centosbook** | k3s worker · 24/7 lid-closed | Dell Inspiron 3501 · i5-1035G1 · 8 GB RAM | CentOS Stream 10 | 192.168.4.33 |
 | **ThinkPad T14 Gen 2** | Remote daily driver | - | Debian 13 | i7-1185G7 · 32 GB DDR4 · 512 GB SSD · WiFi 6 |
 | **debianbook** | Samsung Chromebook Pro | Skylake | Debian 13 · Sway | - |
 
-### Current Architecture (deployed 2026-05-31)
+Deliberately three different distros on the three cluster nodes (Debian, Arch, CentOS
+Stream) rather than identical images — keeps manifests honest about distro-specific
+assumptions, and centosbook doubles as a standing environment for engaging with the
+RHEL/CentOS Stream ecosystem.
+
+### Current Architecture (updated 2026-07-25)
 
 ```
                          INTERNET
@@ -60,7 +65,7 @@ Public via Cloudflare tunnel: `ringcatch.io`, `dashboard.ringcatch.io`
                       (no open ports)
                              |
 ┌────────────────────────────────────────────────────────────────────┐
-│  k3s CLUSTER  (LAN: 192.168.4.x, k3s v1.35)                       │
+│  k3s CLUSTER  (LAN: 192.168.4.x, k3s v1.36)                       │
 │                                                                     │
 │  ┌────────────────────────────────────────────────────────────┐   │
 │  │  MikePC  192.168.4.54  RTX 5060 Ti  (control plane + GPU) │   │
@@ -75,10 +80,10 @@ Public via Cloudflare tunnel: `ringcatch.io`, `dashboard.ringcatch.io`
 │  └────────────────────────────────────────────────────────────┘   │
 │                                                                     │
 │  ┌────────────────────────────────────────────────────────────┐   │
-│  │  archbox  192.168.4.46  i3-4130T  (24/7 worker)           │   │
+│  │  archbox  192.168.4.45  i3-4130T  (24/7 worker)           │   │
 │  │                                                             │   │
-│  │  namespace: agency  (24 services)                          │   │
-│  │  ├─ orchestrator · outreach · scraper · landing            │   │
+│  │  namespace: agency  (23 of 24 services)                    │   │
+│  │  ├─ orchestrator · outreach · scraper                      │   │
 │  │  ├─ command · discord · billing · legal · marketing        │   │
 │  │  ├─ support · success · bi · sales · cfo                   │   │
 │  │  ├─ inbox · delivery · video · dashboard                   │   │
@@ -87,7 +92,8 @@ Public via Cloudflare tunnel: `ringcatch.io`, `dashboard.ringcatch.io`
 │  └────────────────────────────────────────────────────────────┘   │
 │                                                                     │
 │  ┌────────────────────────────────────────────────────────────┐   │
-│  │  MikeInspiron  192.168.4.33  (24/7 lid-closed worker)      │   │
+│  │  centosbook  192.168.4.33  CentOS Stream 10  (24/7, lid-closed) │
+│  │  namespace: agency — landing (only service off archbox)    │   │
 │  └────────────────────────────────────────────────────────────┘   │
 └────────────────────────────────────────────────────────────────────┘
 
@@ -124,4 +130,4 @@ Full IaC for the cluster: k3s manifests for both namespaces (ai + agency), NVIDI
 `Kubernetes / k3s` · `Traefik` · `GitLab CI/CD` · `Podman` (image builds)
 `Cloudflare Tunnel` · `Tailscale` · `nftables` · `CrowdSec` · `AdGuard Home`
 `PostgreSQL` · `n8n` · `Terraform` · `AWS EC2`
-`Debian 13` · `Arch Linux` · `Hyprland` · `Fish`
+`Debian 13` · `Arch Linux` · `CentOS Stream` · `Hyprland` · `Fish`
