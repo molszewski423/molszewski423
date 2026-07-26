@@ -46,15 +46,17 @@ Public via Cloudflare tunnel: `ringcatch.io`, `dashboard.ringcatch.io`
 | Machine | Role | Hardware | OS | LAN |
 |---|---|---|---|---|
 | **MikePC** | k3s control plane + GPU node | RTX 5060 Ti 16 GB | Debian 13 | 192.168.4.54 |
-| **archbox** | k3s worker · 24/7 server | Intel i3-4130T | Arch Linux | 192.168.4.45 |
+| **debianbox** | k3s worker · 24/7 server | Intel i3-4130T | Debian 13 | 192.168.4.45 |
 | **centosbook** | k3s worker · 24/7 lid-closed | Dell Inspiron 3501 · i5-1035G1 · 8 GB RAM | CentOS Stream 10 | 192.168.4.33 |
 | **ThinkPad T14 Gen 2** | Remote daily driver | - | Debian 13 | i7-1185G7 · 32 GB DDR4 · 512 GB SSD · WiFi 6 |
 | **debianbook** | Samsung Chromebook Pro | Skylake | Debian 13 · Sway | - |
 
-Deliberately three different distros on the three cluster nodes (Debian, Arch, CentOS
-Stream) rather than identical images — keeps manifests honest about distro-specific
-assumptions, and centosbook doubles as a standing environment for engaging with the
-RHEL/CentOS Stream ecosystem.
+debianbox was `archbox` (Arch Linux) on the same hardware until wiped and reinstalled as
+Debian 13 on 2026-07-26 after its last Arch update broke reboot reliability. The cluster
+was originally deliberately three different distros (Debian, Arch, CentOS Stream) to keep
+manifests honest about distro-specific assumptions — since the rebuild it's Debian twice
+and CentOS once, so that property is weaker than originally designed. centosbook still
+doubles as a standing environment for engaging with the RHEL/CentOS Stream ecosystem.
 
 ### Current Architecture (updated 2026-07-25)
 
@@ -80,20 +82,22 @@ RHEL/CentOS Stream ecosystem.
 │  └────────────────────────────────────────────────────────────┘   │
 │                                                                     │
 │  ┌────────────────────────────────────────────────────────────┐   │
-│  │  archbox  192.168.4.45  i3-4130T  (24/7 worker)           │   │
+│  │  debianbox  192.168.4.45  i3-4130T  (24/7 worker)          │   │
 │  │                                                             │   │
-│  │  namespace: agency  (23 of 24 services)                    │   │
+│  │  namespace: agency  (21 of 24 services)                    │   │
 │  │  ├─ orchestrator · outreach · scraper                      │   │
 │  │  ├─ command · discord · billing · legal · marketing        │   │
 │  │  ├─ support · success · bi · sales · cfo                   │   │
 │  │  ├─ inbox · delivery · video · dashboard                   │   │
-│  │  ├─ n8n · calcom · kokoro · voice · tunnel                 │   │
+│  │  ├─ n8n · calcom · kokoro · voice                          │   │
 │  │  └─ postgresql-16 (hostPath PVC)                           │   │
 │  └────────────────────────────────────────────────────────────┘   │
 │                                                                     │
 │  ┌────────────────────────────────────────────────────────────┐   │
 │  │  centosbook  192.168.4.33  CentOS Stream 10  (24/7, lid-closed) │
-│  │  namespace: agency — landing (only service off archbox)    │   │
+│  │  namespace: agency — landing + tunnel (no dependency on the │   │
+│  │  shared debianbox-pinned agency-data-pvc; site survives a   │   │
+│  │  debianbox outage)                                          │   │
 │  └────────────────────────────────────────────────────────────┘   │
 └────────────────────────────────────────────────────────────────────┘
 
