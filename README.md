@@ -48,7 +48,7 @@ Public via Cloudflare tunnel: `ringcatch.io`, `dashboard.ringcatch.io`
 | **MikePC** | k3s control plane + GPU node | RTX 5060 Ti 16 GB | Debian 13 | 192.168.4.54 |
 | **debianbox** | k3s worker · 24/7 server | Intel i3-4130T | Debian 13 | 192.168.4.45 |
 | **centosbook** | k3s worker · 24/7 lid-closed | Dell Inspiron 3501 · i5-1035G1 · 8 GB RAM | CentOS Stream 10 | 192.168.4.33 |
-| **ThinkPad T14 Gen 2** | Remote daily driver | - | Debian 13 | i7-1185G7 · 32 GB DDR4 · 512 GB SSD · WiFi 6 |
+| **ThinkPad T14 Gen 2** | Remote daily driver | i7-1185G7 · 32 GB DDR4 · 512 GB SSD · WiFi 6 | Rocky Linux 10.2 | - |
 | **debianbook** | Samsung Chromebook Pro | Skylake | Debian 13 · Sway | - |
 
 debianbox was `archbox` (Arch Linux) on the same hardware until wiped and reinstalled as
@@ -122,7 +122,7 @@ Full IaC for the cluster: k3s manifests for both namespaces (ai + agency), NVIDI
 
 ## Dotfiles & Linux
 
-**[dotfiles](https://gitlab.com/molszewski423/dotfiles)** - Fish, Hyprland, Kitty, Neovim, Starship, Waybar across Debian and Arch. `install.sh` sets up a new machine in one command.
+**[dotfiles](https://gitlab.com/molszewski423/dotfiles)** - Fish, Sway, Kitty, Starship, Waybar for the Rocky Linux daily driver. `install-rocky.sh` sets up a new machine in one command; legacy Debian/Hyprland config kept for history.
 
 **[linux-notes](https://gitlab.com/molszewski423/linux-notes)** - Running log of things worth remembering: hardware quirks, driver fixes, networking gotchas. RTX 5060 Ti Blackwell on Debian, Tailscale/nftables interaction on Arch, i915 firmware dimming, Chromebook UEFI.
 
@@ -134,4 +134,4 @@ Full IaC for the cluster: k3s manifests for both namespaces (ai + agency), NVIDI
 `Kubernetes / k3s` · `Traefik` · `GitLab CI/CD` · `Podman` (image builds)
 `Cloudflare Tunnel` · `Tailscale` · `nftables` · `CrowdSec` · `AdGuard Home`
 `PostgreSQL` · `n8n` · `Terraform` · `AWS EC2`
-`Debian 13` · `Arch Linux` · `CentOS Stream` · `Hyprland` · `Fish`
+`Debian 13` · `Rocky Linux` · `CentOS Stream` · `Sway` · `Fish`
