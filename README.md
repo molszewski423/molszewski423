@@ -29,13 +29,15 @@ Antimicrobial stewardship platform surfacing resistance trends, utilization sign
 
 ## RingCatch Agency
 
-### [ringcatch-agency](https://gitlab.com/molszewski423/ringcatch-agency) · [ringcatch.io](https://ringcatch.io)
+### ringcatch-agency (private repo) · [ringcatch.io](https://ringcatch.io)
 
 Early-stage AI chatbot agency for US local SMBs - HVAC, plumbers, electricians, dental, auto repair, law firms. Launched May 2026, pre-revenue, actively in outreach. Pricing: $450 setup + $89/month. Twenty-four services running in Kubernetes across the cluster - the full pipeline from lead scraping through booking is built and operational, working toward first clients.
 
+Built as an autonomous multi-agent system: a FastAPI orchestrator with 22 tool endpoints drives scraping, outreach, inbox monitoring, and billing agents over an internal event bus, with self-healing recovery (a support agent that detects unhealthy pods and restarts them via the Kubernetes API, capturing logs first so nothing is lost) and automated 6-hour health reporting.
+
 **LLM routing:** Gemini 2.5 Flash → Ollama gemma4:26b (k3s GPU pod on MikePC) → Groq llama-3.3-70b → Groq llama-3.1-8b
 
-Public via Cloudflare tunnel: `ringcatch.io`, `dashboard.ringcatch.io`
+Public via Cloudflare tunnel: `ringcatch.io`, `dashboard.ringcatch.io`. Source is private (real client-facing business) - happy to walk through the architecture and code directly.
 
 ---
 
