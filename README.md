@@ -13,6 +13,18 @@ The technical foundation goes back further than most. At 10 years old I was writ
 
 ---
 
+## LocumView
+
+### [locumview](https://github.com/molszewski423/locumview)
+
+Open-source VDI platform on Red Hat Enterprise Linux 10, and my most direct platform-engineering portfolio piece: hardened GNOME/Sway desktops provisioned by Terraform and Ansible, delivered through the browser via Apache Guacamole behind Keycloak SSO and MFA, RDP never exposed, every environment rebuildable from the repo. STIG/CIS hardened with OpenSCAP evidence committed alongside the code, mapped to HIPAA technical safeguards.
+
+Beyond the base desktop, it's a platform for research and local LLM usage in regulated environments - the same hardened endpoint carrying agentic tooling and generative applications (clinical and research tooling to start, generalizing to other regulated domains later) built on local models, so nothing regulated leaves the boundary.
+
+Status: early build, Phase 1 (hand-built reference desktop) in progress. Full architecture, phase plan, and ADRs live in the repo.
+
+---
+
 ## Clinical AI
 
 ### [pv-workbench](https://gitlab.com/molszewski423/pv-workbench)
