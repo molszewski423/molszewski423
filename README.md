@@ -61,18 +61,21 @@ Public via Cloudflare tunnel: `ringcatch.io`, `dashboard.ringcatch.io`. Source i
 |---|---|---|---|---|
 | **MikePC** | k3s control plane + GPU node | RTX 5060 Ti 16 GB | Debian 13 | 192.168.4.54 |
 | **debianbox** | k3s worker · 24/7 server | Intel i3-4130T | Debian 13 | 192.168.4.45 |
-| **centosbook** | k3s worker · 24/7 lid-closed | Dell Inspiron 3501 · i5-1035G1 · 8 GB RAM | CentOS Stream 10 | 192.168.4.33 |
-| **ThinkPad T14 Gen 2** | Remote daily driver | i7-1185G7 · 32 GB DDR4 · 512 GB SSD · WiFi 6 | Rocky Linux 10.2 | - |
+| **devsuse** | SUSE dev box for LocumView (VDI) · not a cluster node | Dell Inspiron 3501 · i5-1035G1 · 8 GB RAM | openSUSE Leap 16.0 | 192.168.4.33 |
+| **ThinkPad T14 Gen 2** | Remote daily driver | i7-1185G7 · 32 GB DDR4 · 512 GB SSD · WiFi 6 | Fedora 45 | - |
 | **debianbook** | Samsung Chromebook Pro | Skylake | Debian 13 · Sway | - |
 
 debianbox was `archbox` (Arch Linux) on the same hardware until wiped and reinstalled as
 Debian 13 on 2026-07-26 after its last Arch update broke reboot reliability. The cluster
 was originally deliberately three different distros (Debian, Arch, CentOS Stream) to keep
-manifests honest about distro-specific assumptions — since the rebuild it's Debian twice
-and CentOS once, so that property is weaker than originally designed. centosbook still
-doubles as a standing environment for engaging with the RHEL/CentOS Stream ecosystem.
+manifests honest about distro-specific assumptions. After the rebuild it was Debian twice
+and CentOS once, and on 2026-10-04 the CentOS worker (centosbook) was reinstalled as
+**devsuse**, an openSUSE Leap 16.0 development box for the SUSE version of LocumView, my
+Guacamole-based VDI platform. It was intentionally not rejoined: a dev box's churn and
+reboots shouldn't strand cluster pods, and the two remaining nodes have plenty of headroom.
+The cluster is now mikepc + debianbox.
 
-### Current Architecture (updated 2026-07-25)
+### Current Architecture (updated 2026-10-04)
 
 ```
                          INTERNET
@@ -92,7 +95,11 @@ doubles as a standing environment for engaging with the RHEL/CentOS Stream ecosy
 │  │  ├─ pv-workbench      → http://pv.lan                      │   │
 │  │  ├─ ams-intelligence  → http://ams.lan                     │   │
 │  │  ├─ argus-bot         → Discord (Argus#1432)               │   │
-│  │  └─ traefik ingress                                         │   │
+│  │  ├─ traefik ingress                                         │   │
+│  │                                                             │   │
+│  │  namespace: agency  (landing + cloudflared tunnel)          │   │
+│  │  └─ no dependency on debianbox's agency-data-pvc,           │   │
+│  │     so ringcatch.io survives a debianbox outage             │   │
 │  └────────────────────────────────────────────────────────────┘   │
 │                                                                     │
 │  ┌────────────────────────────────────────────────────────────┐   │
@@ -105,13 +112,6 @@ doubles as a standing environment for engaging with the RHEL/CentOS Stream ecosy
 │  │  ├─ inbox · delivery · video · dashboard                   │   │
 │  │  ├─ n8n · calcom · kokoro · voice                          │   │
 │  │  └─ postgresql-16 (hostPath PVC)                           │   │
-│  └────────────────────────────────────────────────────────────┘   │
-│                                                                     │
-│  ┌────────────────────────────────────────────────────────────┐   │
-│  │  centosbook  192.168.4.33  CentOS Stream 10  (24/7, lid-closed) │
-│  │  namespace: agency — landing + tunnel (no dependency on the │   │
-│  │  shared debianbox-pinned agency-data-pvc; site survives a   │   │
-│  │  debianbox outage)                                          │   │
 │  └────────────────────────────────────────────────────────────┘   │
 └────────────────────────────────────────────────────────────────────┘
 
@@ -148,4 +148,4 @@ Full IaC for the cluster: k3s manifests for both namespaces (ai + agency), NVIDI
 `Kubernetes / k3s` · `Traefik` · `GitLab CI/CD` · `Podman` (image builds)
 `Cloudflare Tunnel` · `Tailscale` · `nftables` · `CrowdSec` · `AdGuard Home`
 `PostgreSQL` · `n8n` · `Terraform` · `AWS EC2`
-`Debian 13` · `Rocky Linux` · `CentOS Stream` · `Sway` · `Fish`
+`Debian 13` · `Fedora` · `openSUSE Leap` · `Rocky Linux` · `CentOS Stream` · `Sway` · `Fish`
