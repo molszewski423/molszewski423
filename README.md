@@ -21,7 +21,7 @@ Open-source VDI platform on Red Hat Enterprise Linux 10, and my most direct plat
 
 Beyond the base desktop, it's a platform for research and local LLM usage in regulated environments - the same hardened endpoint carrying agentic tooling and generative applications (clinical and research tooling to start, generalizing to other regulated domains later) built on local models, so nothing regulated leaves the boundary.
 
-Status: early build, Phase 1 (hand-built reference desktop) in progress. Full architecture, phase plan, and ADRs live in the repo.
+Status: early build, Phase 1 (hand-built reference desktop) in progress. A SUSE variant (openSUSE Leap 16.0, tracking SLES 16) is being developed in parallel on a dedicated dev box, `devsuse`, so the platform isn't tied to a single enterprise Linux vendor. Full architecture, phase plan, and ADRs live in the repo.
 
 ---
 
